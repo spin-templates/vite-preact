@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fff7ed" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0c0a09" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    >
+    <style>
+      html {
+        background: #e5ddd0;
+      }
+      @media (prefers-color-scheme: dark) {
+        html {
+          background: #0c0a09;
+        }
+      }
+    </style>
+    <title>{{ .project_name }} — Preact + Vite{{ if eq .variant "typescript" }} + TypeScript{{ end }}</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.{{ if eq .variant "typescript" }}tsx{{ else }}jsx{{ end }}"></script>
+  </body>
+</html>

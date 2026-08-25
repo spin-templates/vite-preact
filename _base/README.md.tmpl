@@ -1,0 +1,21 @@
+# {{ .project_name }} -- Preact + {{ if eq .variant "typescript" }}TypeScript{{ else }}JavaScript{{ end }} + Vite
+
+{{ if .description }}{{ .description }}
+
+{{ end }}Scaffolded with [Spin](https://spincli.pages.dev).
+
+This template provides a minimal setup to get Preact working in Vite with HMR.
+
+## Getting Started
+
+```bash
+{{ .package_manager }} install
+{{ .package_manager }} run dev
+```
+
+## Building for Production
+
+```bash
+{{ .package_manager }} run build
+{{ .package_manager }} run preview
+```

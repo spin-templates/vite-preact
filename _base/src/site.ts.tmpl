@@ -1,0 +1,20 @@
+export const site = {
+  name: '{{ .project_name }}',
+  variant: '{{ if eq .variant "typescript" }}typescript{{ else }}javascript{{ end }}',
+  description: '{{ .description }}',
+  packageManager: '{{ .package_manager }}',
+  gitInit: {{ .git_init }},
+  useDocker: {{ .use_docker }},
+  includeDemo: {{ .include_demo }},
+  github: 'https://github.com/spin-templates/vite-preact',
+  registry: 'https://github.com/spin-templates/registry',
+  tools: [
+    { label: 'Preact docs', href: 'https://preactjs.com' },
+    { label: 'Vite docs', href: 'https://vite.dev' },
+    {{- if eq .variant "typescript" }}
+    { label: 'TypeScript docs', href: 'https://www.typescriptlang.org/docs/' },
+    {{- else }}
+    { label: 'JavaScript docs', href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript' },
+    {{- end }}
+  ],
+} as const

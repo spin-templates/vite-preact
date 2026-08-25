@@ -1,0 +1,77 @@
+name = "vite-preact"
+description = "Vite + Preact starter with HMR and TypeScript support"
+type = "web"
+language = "javascript"
+license = "MIT"
+repository = "https://github.com/spin-templates/vite-preact"
+tags = ["vite", "preact", "web", "typescript", "javascript"]
+
+[params]
+variant = { type = "select", prompt = "Which language variant?", options = ["javascript", "typescript"], default = "typescript" }
+package_manager = { type = "select", prompt = "Which package manager?", options = ["npm", "yarn", "pnpm", "bun"], default = "npm" }
+use_docker = { type = "bool", prompt = "Include Docker support?", default = false }
+git_init = { type = "bool", prompt = "Initialize a git repository?", default = true }
+description = { type = "textarea", prompt = "What is your project description?", default = "A production-ready Preact + Vite starter with fast HMR — nothing to clean up." }
+include_agents_md = { type = "bool", prompt = "Include AGENTS.md with agent instructions?", default = true }
+include_demo = { type = "bool", prompt = "Include the showcase UI?", default = true }
+tailwind = { type = "bool", prompt = "Include Tailwind CSS v4?", default = false }
+
+[author]
+name = "Samouly"
+email = "alasamouly@gmail.com"
+url = "https://github.com/spin-templates/vite-preact"
+
+[[include]]
+path = "vite.config.ts.tmpl"
+if = "{{ eq .variant \"typescript\" }}"
+
+[[include]]
+path = "tsconfig.json"
+if = "{{ eq .variant \"typescript\" }}"
+
+[[include]]
+path = "tsconfig.app.json"
+if = "{{ eq .variant \"typescript\" }}"
+
+[[include]]
+path = "tsconfig.node.json"
+if = "{{ eq .variant \"typescript\" }}"
+
+[[include]]
+path = "src/main.tsx"
+if = "{{ eq .variant \"typescript\" }}"
+
+[[include]]
+path = "src/app.tsx.tmpl"
+if = "{{ eq .variant \"typescript\" }}"
+
+[[include]]
+path = "vite.config.js.tmpl"
+if = "{{ eq .variant \"javascript\" }}"
+
+[[include]]
+path = "src/main.jsx"
+if = "{{ eq .variant \"javascript\" }}"
+
+[[include]]
+path = "src/app.jsx.tmpl"
+if = "{{ eq .variant \"javascript\" }}"
+
+[[include]]
+path = "Dockerfile"
+if = "{{ .use_docker }}"
+
+[[include]]
+path = ".dockerignore"
+if = "{{ .use_docker }}"
+
+[[include]]
+path = "AGENTS.md"
+if = "{{ .include_agents_md }}"
+[[post]]
+run = "{{ if .git_init }}git init && git add -A && git commit -m \"Initial commit - Spin\"{{ end }}"
+
+[[post]]
+run = "{{ .package_manager }} install"
+
+exclude = ["node_modules/**", ".git/**", "dist/**"]

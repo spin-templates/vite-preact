@@ -1,0 +1,31 @@
+const STORAGE_KEY = 'theme'
+const mq = window.matchMedia('(prefers-color-scheme: dark)')
+
+export function resolveTheme(pref) {
+  return pref === 'system' ? (mq.matches ? 'dark' : 'light') : pref
+}
+
+export function getThemePref() {
+  const stored = localStorage.getItem(STORAGE_KEY)
+  return stored === 'light' || stored === 'dark' || stored === 'system'
+    ? stored
+    : 'system'
+}
+
+function apply() {
+  const resolved = resolveTheme(getThemePref())
+  const root = document.documentElement
+  root.dataset.theme = resolved
+  root.style.colorScheme = resolved
+  root.style.background = resolved === 'dark' ? '#0c0a09' : '#e5ddd0'
+}
+
+export function initTheme() {
+  apply()
+  mq.addEventListener('change', apply)
+}
+
+export function setTheme(pref) {
+  localStorage.setItem(STORAGE_KEY, pref)
+  apply()
+}

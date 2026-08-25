@@ -1,0 +1,23 @@
+{
+  "name": "{{ .project_name }}",
+  "description": "{{ .description }}",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "{{ if eq .variant "typescript" }}tsc -b && {{ end }}vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "preact": "^10.29.7"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.6",
+    "vite": "^8.1.5"{{ if eq .variant "typescript" }},
+    "@types/node": "^24.13.3",
+    "typescript": "~6.0.2"{{ end }}{{ if .tailwind }},
+    "tailwindcss": "^4.3.3",
+    "@tailwindcss/vite": "^4.3.3"{{ end }}
+  }
+}
